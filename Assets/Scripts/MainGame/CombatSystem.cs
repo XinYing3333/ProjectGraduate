@@ -44,8 +44,7 @@ public class CombatSystem : MonoBehaviour
                 break;
         }
 
-        // 顯示攻擊結果文本
-        attackTimingText.text = "Attack Timing: " + timing;
+        attackTimingText.text = timing;
         StartCoroutine(ShowAttackTimingText());
     }
 
@@ -53,13 +52,13 @@ public class CombatSystem : MonoBehaviour
     private IEnumerator ShowAttackTimingText()
     {
         attackTimingUI.SetActive(true); 
-        yield return new WaitForSeconds(0.6f); 
+        yield return new WaitForSeconds(0.55f); 
         attackTimingUI.SetActive(false); 
     }
 
     private IEnumerator ResetAttackState()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.6f);
         _attackEnemy = false; 
     }
 

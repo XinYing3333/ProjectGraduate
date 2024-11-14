@@ -28,7 +28,7 @@ public class SwordAttack : MonoBehaviour
 
     private void HandlePlayerAttack()
     {
-        Debug.Log("Player is attacking, Beat " + combatSystem.timing + ", Enemy HP -" + combatSystem.currentDamage);
+        Debug.Log("Beat " + combatSystem.timing + ", Enemy HP -" + combatSystem.currentDamage);
     }
 
 }

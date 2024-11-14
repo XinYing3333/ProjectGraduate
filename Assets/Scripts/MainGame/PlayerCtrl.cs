@@ -5,13 +5,16 @@ using UnityEngine.Serialization;
 
 public class PlayerCtrl : MonoBehaviour
 {
+    [Header("Input Settings")]
+    public PlayerInput playerInput;
+    [HideInInspector]public Animator anim;
+    public Transform cameraTransform;
+    private Rigidbody _rb;
+
     [SerializeField] private float movementSpeed = 10.0f;
     [SerializeField] private float turnSpeed = 20f;
     [SerializeField] private float gravityNum = 30f;
     
-    [Header("Input Settings")]
-    public PlayerInput playerInput;
-
     private InputAction _movement;
     private Vector3 _rawInputMovement;
     private bool _isMove;
@@ -21,12 +24,9 @@ public class PlayerCtrl : MonoBehaviour
     private bool _isGrounded;
     [SerializeField] private float jumpForce = 10f;
 
-    public bool isAttacking;
-    
-    private Rigidbody _rb;
+    [HideInInspector]public bool isAttacking;
     private CombatSystem _combatSystem;
-    public Animator anim;
-    public Transform cameraTransform;
+
 
     void Start()
     {
@@ -105,7 +105,7 @@ public class PlayerCtrl : MonoBehaviour
     
     private IEnumerator ResetAttackState()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.6f);
         isAttacking = false; 
     }
 

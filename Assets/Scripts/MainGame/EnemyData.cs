@@ -7,7 +7,7 @@ public class Data
 {
     public string enemyName;
     public float health;
-    //public float damage;
+    public float damage;
 
 }
 

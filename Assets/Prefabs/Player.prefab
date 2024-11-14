@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 7801616818054183646}
   - component: {fileID: 3263621584630956166}
   - component: {fileID: 8234746853570232714}
+  - component: {fileID: 1578282346229339974}
   - component: {fileID: 8826890521589623922}
   - component: {fileID: 7105175313924515432}
   - component: {fileID: 2087270853878724888}
@@ -173,14 +174,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bc3319a6ae51af4eb6c9cb2c28f2a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInput: {fileID: 7105175313924515432}
+  anim: {fileID: 840853141480877162}
+  cameraTransform: {fileID: 0}
   movementSpeed: 10
   turnSpeed: 20
   gravityNum: -110
-  playerInput: {fileID: 7105175313924515432}
   jumpForce: 35
   isAttacking: 0
-  anim: {fileID: 840853141480877162}
-  cameraTransform: {fileID: 0}
 --- !u!114 &3263621584630956166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,10 +216,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rhythmCheck: {fileID: 3263621584630956166}
   attackTimingText: {fileID: 0}
+  attackTimingUI: {fileID: 0}
   playerCtrl: {fileID: 7801616818054183646}
   defaultDamage: 3
   currentDamage: 0
   timing: 
+--- !u!114 &1578282346229339974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4538663575732547482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c10ade46d3770f439f170907ad4ae75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  maxEnergy: 100
+  energyRechargeRate: 5
+  healthSlider: {fileID: 0}
+  energySlider: {fileID: 0}
 --- !u!136 &8826890521589623922
 CapsuleCollider:
   m_ObjectHideFlags: 0

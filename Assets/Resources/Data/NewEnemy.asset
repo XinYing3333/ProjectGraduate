@@ -15,4 +15,4 @@ MonoBehaviour:
   myData:
     enemyName: Haha
     health: 100
-    damage: 5
+    damage: 10

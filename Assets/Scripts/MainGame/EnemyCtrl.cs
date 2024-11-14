@@ -13,6 +13,7 @@ public class EnemyCtrl : MonoBehaviour
     public Animator anim;
 
     private bool _enemyHurt;
+    private PlayerStats _playerStats;
     
     void Start()
     {
@@ -26,6 +27,11 @@ public class EnemyCtrl : MonoBehaviour
         if(_enemyHurt)return;
         anim.SetTrigger("isHurt");
         healthBar.value -= playerDamage;
+    }
+
+    public void OutputDamage()
+    {
+        _playerStats.TakeDamage(enemyData.myData.damage);
     }
     
     private IEnumerator ResetHurtState()

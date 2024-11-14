@@ -61,8 +61,6 @@ public class RhythmCheck : MonoBehaviour
 
             // 計算操作與最近節拍點的偏差
             float timeDifference = Mathf.Abs(currentTime - nearestBeatTime);
-
-            Debug.Log(currentTime + " - " + nearestBeatTime + " = " + timeDifference);
             
             // 返回相應的精準度
             if (timeDifference <= perfectWindow)
@@ -81,27 +79,22 @@ public class RhythmCheck : MonoBehaviour
 
         void UpdateBeatUI()
         {
-            float currentTime = musicSource.time; 
+            string timing = CheckAttackTiming();
 
-            float nearestBeatTime = Mathf.Round(currentTime / _beatInterval) * _beatInterval;
-
-            float timeDifference = Mathf.Abs(currentTime - nearestBeatTime);
-
-
-            if (timeDifference <= perfectWindow)
+            switch (timing)
             {
-                uiImage.rectTransform.localScale = perfectScale;
-                uiImage.color = Color.green;
-            }
-            else if (timeDifference <= goodWindow)
-            {
-                uiImage.rectTransform.localScale = goodScale;
-                uiImage.color = Color.blue;
-            }
-            else
-            {
-                uiImage.rectTransform.localScale = normalScale;
-                uiImage.color = Color.grey;
+                case "Perfect":
+                    uiImage.rectTransform.localScale = perfectScale;
+                    uiImage.color = Color.green;
+                    break;
+                case "Good":
+                    uiImage.rectTransform.localScale = goodScale;
+                    uiImage.color = Color.blue;
+                    break;
+                case "Normal":
+                    uiImage.rectTransform.localScale = normalScale;
+                    uiImage.color = Color.grey;
+                    break;
             }
         }
     }
