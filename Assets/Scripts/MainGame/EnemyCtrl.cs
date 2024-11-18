@@ -9,6 +9,8 @@ public class EnemyCtrl : MonoBehaviour
     public EnemyData enemyData;
     public Text nameText;
     public Slider healthBar;
+
+    public float resetHurtTime = 0.5f;
     
     public Animator anim;
 
@@ -37,7 +39,7 @@ public class EnemyCtrl : MonoBehaviour
     private IEnumerator ResetHurtState()
     {
         _enemyHurt = true;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(resetHurtTime);
         _enemyHurt = false; 
     }
 

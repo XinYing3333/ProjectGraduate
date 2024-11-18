@@ -1,12 +1,12 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SwordAttack : MonoBehaviour
 {
     public GameObject myPlayer; 
-    public CombatSystem combatSystem; 
+    private CombatSystem combatSystem;
+
+    private bool _attackEnemy = false; // 避免重複攻擊同一敵人
 
     private void Start()
     {
@@ -28,7 +28,20 @@ public class SwordAttack : MonoBehaviour
 
     private void HandlePlayerAttack()
     {
-        Debug.Log("Beat " + combatSystem.timing + ", Enemy HP -" + combatSystem.currentDamage);
+        _attackEnemy = true; // 當玩家攻擊時允許劍進行碰撞檢測
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (_attackEnemy && other.CompareTag("Enemy"))
+        {
+            _attackEnemy = false; // 重置避免重複攻擊同一敵人
+            EnemyCtrl enemy = other.GetComponent<EnemyCtrl>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(combatSystem.currentDamage);
+                Debug.Log("Beat " + combatSystem.timing + ", Enemy HP -" + combatSystem.currentDamage);
+            }
+        }
+    }
 }

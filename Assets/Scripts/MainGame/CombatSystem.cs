@@ -15,40 +15,46 @@ public class CombatSystem : MonoBehaviour
 
     [HideInInspector]
     public string timing;
+    [HideInInspector] public bool IsAttacking { get; private set; }
+    public float attackResetTime = 0.65f;
 
     public delegate void TriggerEnterEvent();
-    public event TriggerEnterEvent OnPlayerAttack; 
-
-    private bool _attackEnemy;
+    public event TriggerEnterEvent OnPlayerAttack; // 攻擊事件
 
     private void Start()
     {
-        _attackEnemy = false;
         attackTimingUI.SetActive(false); 
     }
 
     public void PerformAttack()
     {
-        timing = RhythmCheck.Instance.CheckAttackTiming();
-
-        switch (timing)
+        if (!IsAttacking)
         {
-            case "Perfect":
-                currentDamage = defaultDamage * 2f;
-                break;
-            case "Good":
-                currentDamage = defaultDamage * 1.5f;
-                break;
-            case "Normal":
-                currentDamage = defaultDamage;
-                break;
-        }
+            IsAttacking = true;
+            timing = RhythmCheck.Instance.CheckAttackTiming();
 
-        attackTimingText.text = timing;
-        StartCoroutine(ShowAttackTimingText());
+            switch (timing)
+            {
+                case "Perfect":
+                    currentDamage = defaultDamage * 2f;
+                    break;
+                case "Good":
+                    currentDamage = defaultDamage * 1.5f;
+                    break;
+                case "Normal":
+                    currentDamage = defaultDamage;
+                    break;
+            }
+
+            attackTimingText.text = timing;
+            StartCoroutine(ShowAttackTimingText());
+            StartCoroutine(ResetAttackState());
+
+            // 觸發攻擊事件，通知劍擊進行碰撞檢測
+            OnPlayerAttack?.Invoke();
+        }
     }
 
-    // 顯示 Text 並在短暫時間後隱藏
     private IEnumerator ShowAttackTimingText()
     {
         attackTimingUI.SetActive(true); 
@@ -58,25 +64,7 @@ public class CombatSystem : MonoBehaviour
 
     private IEnumerator ResetAttackState()
     {
-        yield return new WaitForSeconds(0.6f);
-        _attackEnemy = false; 
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Enemy")) 
-        {
-            if (!_attackEnemy && playerCtrl.isAttacking)
-            {
-                _attackEnemy = true;
-                OnPlayerAttack?.Invoke();
-                StartCoroutine(ResetAttackState());
-                EnemyCtrl enemy = other.GetComponent<EnemyCtrl>();
-                if (enemy != null)
-                {
-                    enemy.TakeDamage(currentDamage);
-                }
-            }
-        }
+        yield return new WaitForSeconds(attackResetTime);
+        IsAttacking = false;
     }
 }

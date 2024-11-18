@@ -24,7 +24,7 @@ public class PlayerCtrl : MonoBehaviour
     private bool _isGrounded;
     [SerializeField] private float jumpForce = 10f;
 
-    [HideInInspector]public bool isAttacking;
+    
     private CombatSystem _combatSystem;
 
 
@@ -46,13 +46,10 @@ public class PlayerCtrl : MonoBehaviour
     {
         OnMovement();
 
-        if (Input.GetMouseButtonDown(0) && !_isJumping && !isAttacking)
+        if (Input.GetMouseButtonDown(0) && !_isJumping && !_combatSystem.IsAttacking)
         {
             anim.SetTrigger("attacking");
-            isAttacking = true;
             _combatSystem.PerformAttack();
-
-            StartCoroutine(ResetAttackState());
         }
     }
 
@@ -64,7 +61,7 @@ public class PlayerCtrl : MonoBehaviour
     
     private void OnMovement()
     {
-        if (isAttacking) return;
+        if (_combatSystem.IsAttacking) return;
         
         Vector2 inputMovement = _movement.ReadValue<Vector2>();
         
@@ -84,7 +81,7 @@ public class PlayerCtrl : MonoBehaviour
     
     private void RotateMove()
     {
-        if (_rawInputMovement == Vector3.zero || isAttacking) return;
+        if (_rawInputMovement == Vector3.zero || _combatSystem.IsAttacking) return;
 
         Vector3 newPosition = transform.position + _rawInputMovement.normalized * (movementSpeed * Time.deltaTime);
         _rb.MovePosition(newPosition);
@@ -95,18 +92,12 @@ public class PlayerCtrl : MonoBehaviour
 
     private void OnJump()
     {
-        if (_isJumping || isAttacking) return;
+        if (_isJumping || _combatSystem.IsAttacking) return;
         
         _isJumping = true;
         anim.SetBool("jumping", true);
         _rb.velocity = new Vector3(0, jumpForce, 0);
         Physics.gravity = new Vector3(0, gravityNum, 0);
-    }
-    
-    private IEnumerator ResetAttackState()
-    {
-        yield return new WaitForSeconds(0.6f);
-        isAttacking = false; 
     }
 
     private void OnCollisionEnter(Collision other)

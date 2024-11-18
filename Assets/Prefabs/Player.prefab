@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myPlayer: {fileID: 4538663575732547482}
-  combatSystem: {fileID: 0}
+  combatSystem: {fileID: 8234746853570232714}
 --- !u!1 &4538663575732547482
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,7 +181,6 @@ MonoBehaviour:
   turnSpeed: 20
   gravityNum: -110
   jumpForce: 35
-  isAttacking: 0
 --- !u!114 &3263621584630956166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,9 +196,6 @@ MonoBehaviour:
   bpm: 140
   musicSource: {fileID: 0}
   uiImage: {fileID: 0}
-  perfectScale: {x: 1.8, y: 1.8, z: 1.8}
-  goodScale: {x: 1.4, y: 1.4, z: 1.4}
-  normalScale: {x: 1, y: 1, z: 1}
   perfectWindow: 0.08
   goodWindow: 0.15
 --- !u!114 &8234746853570232714
@@ -221,6 +217,7 @@ MonoBehaviour:
   defaultDamage: 3
   currentDamage: 0
   timing: 
+  attackResetTime: 0.6
 --- !u!114 &1578282346229339974
 MonoBehaviour:
   m_ObjectHideFlags: 0

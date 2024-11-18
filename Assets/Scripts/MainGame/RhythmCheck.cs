@@ -17,11 +17,10 @@ public class RhythmCheck : MonoBehaviour
         [Header("UI Settings")]
 
         public Image uiImage; 
-        public Vector3 perfectScale = new Vector3(1.5f, 1.5f, 1.5f);
-        public Vector3 goodScale = new Vector3(1.2f, 1.2f, 1.2f);
-        public Vector3 normalScale = new Vector3(1.0f, 1.0f, 1.0f);
+        private Vector3 _perfectScale = new Vector3(1.5f, 1.5f, 1.5f);
+        private Vector3 _goodScale = new Vector3(1.2f, 1.2f, 1.2f);
+        private Vector3 _normalScale = new Vector3(1.0f, 1.0f, 1.0f);
 
-        // 節奏判定窗口
         public float perfectWindow = 0.15f;
         public float goodWindow = 0.3f;
 
@@ -51,18 +50,14 @@ public class RhythmCheck : MonoBehaviour
             UpdateBeatUI();
         }
 
-        // 檢查攻擊的時機是否在節拍點上
         public string CheckAttackTiming()
         {
-            float currentTime = musicSource.time; // 使用音樂播放時間，避免累積誤差
+            float currentTime = musicSource.time; 
 
-            // 計算最接近的節拍點
             float nearestBeatTime = Mathf.Round(currentTime / _beatInterval) * _beatInterval;
 
-            // 計算操作與最近節拍點的偏差
             float timeDifference = Mathf.Abs(currentTime - nearestBeatTime);
             
-            // 返回相應的精準度
             if (timeDifference <= perfectWindow)
             {
                 return "Perfect";
@@ -84,15 +79,15 @@ public class RhythmCheck : MonoBehaviour
             switch (timing)
             {
                 case "Perfect":
-                    uiImage.rectTransform.localScale = perfectScale;
+                    uiImage.rectTransform.localScale = _perfectScale;
                     uiImage.color = Color.green;
                     break;
                 case "Good":
-                    uiImage.rectTransform.localScale = goodScale;
+                    uiImage.rectTransform.localScale = _goodScale;
                     uiImage.color = Color.blue;
                     break;
                 case "Normal":
-                    uiImage.rectTransform.localScale = normalScale;
+                    uiImage.rectTransform.localScale = _normalScale;
                     uiImage.color = Color.grey;
                     break;
             }
