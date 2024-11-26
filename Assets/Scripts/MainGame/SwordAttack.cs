@@ -4,31 +4,44 @@ using UnityEngine;
 public class SwordAttack : MonoBehaviour
 {
     public GameObject myPlayer; 
-    private CombatSystem combatSystem;
+    private CombatSystem _combatSystem;
 
     private bool _attackEnemy = false; // 避免重複攻擊同一敵人
+    private CapsuleCollider _triggerCollider;
 
     private void Start()
     {
-        combatSystem = myPlayer.GetComponent<CombatSystem>();
-        if (combatSystem != null)
+        _triggerCollider = GetComponent<CapsuleCollider>();
+
+        _combatSystem = myPlayer.GetComponent<CombatSystem>();
+        if (_combatSystem != null)
         {
-            combatSystem.OnPlayerAttack -= HandlePlayerAttack; // 確保無重複訂閱
-            combatSystem.OnPlayerAttack += HandlePlayerAttack;
+            _combatSystem.OnPlayerAttack -= HandlePlayerAttack; // 確保無重複訂閱
+            _combatSystem.OnPlayerAttack += HandlePlayerAttack;
         }
     }
 
     private void OnDisable()
     {
-        if (combatSystem != null)
+        if (_combatSystem != null)
         {
-            combatSystem.OnPlayerAttack -= HandlePlayerAttack;
+            _combatSystem.OnPlayerAttack -= HandlePlayerAttack;
         }
     }
 
     private void HandlePlayerAttack()
     {
         _attackEnemy = true; // 當玩家攻擊時允許劍進行碰撞檢測
+    }
+
+    public void EnableTriggerCollider()
+    {
+        _triggerCollider.enabled = true;
+    }
+    
+    public void DisableTriggerCollider()
+    {
+        _triggerCollider.enabled = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -39,8 +52,8 @@ public class SwordAttack : MonoBehaviour
             EnemyCtrl enemy = other.GetComponent<EnemyCtrl>();
             if (enemy != null)
             {
-                enemy.TakeDamage(combatSystem.currentDamage);
-                Debug.Log("Beat " + combatSystem.timing + ", Enemy HP -" + combatSystem.currentDamage);
+                enemy.TakeDamage(_combatSystem.currentDamage);
+                Debug.Log("Beat " + _combatSystem.timing + ", Enemy HP -" + _combatSystem.currentDamage);
             }
         }
     }

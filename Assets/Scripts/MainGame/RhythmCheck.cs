@@ -21,8 +21,8 @@ public class RhythmCheck : MonoBehaviour
         private Vector3 _goodScale = new Vector3(1.2f, 1.2f, 1.2f);
         private Vector3 _normalScale = new Vector3(1.0f, 1.0f, 1.0f);
 
-        public float perfectWindow = 0.15f;
-        public float goodWindow = 0.3f;
+        public float perfectWindow = 0.2f;
+        public float goodWindow = 0.4f;
 
         private void Awake()
         {
@@ -80,14 +80,17 @@ public class RhythmCheck : MonoBehaviour
             {
                 case "Perfect":
                     uiImage.rectTransform.localScale = _perfectScale;
+                    uiImage.rectTransform.localPosition = new Vector3(340, 122, 0);
                     uiImage.color = Color.green;
                     break;
                 case "Good":
                     uiImage.rectTransform.localScale = _goodScale;
+                    uiImage.rectTransform.localPosition = new Vector3(246, 122, 0);
                     uiImage.color = Color.blue;
                     break;
                 case "Normal":
                     uiImage.rectTransform.localScale = _normalScale;
+                    uiImage.rectTransform.localPosition = new Vector3(105, 122, 0);
                     uiImage.color = Color.grey;
                     break;
             }

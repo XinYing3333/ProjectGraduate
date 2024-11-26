@@ -973,7 +973,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 340, y: 122}
+  m_AnchoredPosition: {x: 102, y: 122}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &468673722
@@ -1093,6 +1093,11 @@ Transform:
   - {fileID: 595980350}
   m_Father: {fileID: 2136476031}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &502275338 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 840853141480877162, guid: ed44bf16f236bbd4f84b5a3052e5e70f, type: 3}
+  m_PrefabInstance: {fileID: 1131561911}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &513591562
 GameObject:
   m_ObjectHideFlags: 0
@@ -1919,7 +1924,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1094103806}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.051694095, y: -0.8281971, z: -0.07746917, w: 0.5526444}
+  m_LocalRotation: {x: -0.05169409, y: -0.8281971, z: -0.07746917, w: 0.5526444}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1946,6 +1951,10 @@ PrefabInstance:
     - target: {fileID: 2274175497725199401, guid: ed44bf16f236bbd4f84b5a3052e5e70f, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3263621584630956166, guid: ed44bf16f236bbd4f84b5a3052e5e70f, type: 3}
+      propertyPath: bpm
+      value: 140
       objectReference: {fileID: 0}
     - target: {fileID: 3263621584630956166, guid: ed44bf16f236bbd4f84b5a3052e5e70f, type: 3}
       propertyPath: uiImage
@@ -2024,6 +2033,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 119619591}
     - target: {fileID: 8234746853570232714, guid: ed44bf16f236bbd4f84b5a3052e5e70f, type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 502275338}
+    - target: {fileID: 8234746853570232714, guid: ed44bf16f236bbd4f84b5a3052e5e70f, type: 3}
       propertyPath: attackTimingUI
       value: 
       objectReference: {fileID: 804184352}
@@ -2031,6 +2044,22 @@ PrefabInstance:
       propertyPath: attackTimingText
       value: 
       objectReference: {fileID: 804184354}
+    - target: {fileID: 8234746853570232714, guid: ed44bf16f236bbd4f84b5a3052e5e70f, type: 3}
+      propertyPath: combo.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8234746853570232714, guid: ed44bf16f236bbd4f84b5a3052e5e70f, type: 3}
+      propertyPath: combo.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2cdc969bc48a3474d94326ef03dbe05c, type: 2}
+    - target: {fileID: 8234746853570232714, guid: ed44bf16f236bbd4f84b5a3052e5e70f, type: 3}
+      propertyPath: combo.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4a689196767c08a4b89c7052bd5bccb0, type: 2}
+    - target: {fileID: 8234746853570232714, guid: ed44bf16f236bbd4f84b5a3052e5e70f, type: 3}
+      propertyPath: combo.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 999fee981986ce34b8d2c77992579d9e, type: 2}
     - target: {fileID: 8542011414950902636, guid: ed44bf16f236bbd4f84b5a3052e5e70f, type: 3}
       propertyPath: m_Enabled
       value: 0
